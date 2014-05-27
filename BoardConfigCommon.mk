@@ -170,7 +170,7 @@ TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TW_DEFAULT_EXTERNAL_STORAGE := true
 # TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_JB_CRYPTO := true
-TW_CRYPTO_FS_TYPE := "f2fs
+TW_CRYPTO_FS_TYPE := "f2fs"
 TW_CRYPTO_REAL_BLKDEV := "/dev/block/platform/msm_sdcc.1/by-name/userdata"
 TW_CRYPTO_MNT_POINT := "/data"
 TW_CRYPTO_FS_OPTIONS := "nosuid,nodev,barrier=1,noauto_da_alloc,discard"
