@@ -30,9 +30,32 @@ TARGET_BOOTLOADER_BOARD_NAME := MSM8974
 TARGET_BOARD_PLATFORM := msm8974
 BOARD_VENDOR_PLATFORM := rhine
 
+
+BOARD_USES_HGL := true
+BOARD_USES_OVERLAY := true
+USE_OPENGL_RENDERER := true
+TARGET_USES_ION := true
+TARGET_USES_C2D_COMPOSITION := true
+BOARD_USES_HWCOMPOSER := true
+ENABLE_WEBGL := true
+
 # Architecture
-TARGET_ARCH_VARIANT_CPU := cortex-a9
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_ARCH := arm
+TARGET_CPU_SMP := true
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_ARCH_VARIANT_CPU := cortex-a15
 TARGET_CPU_VARIANT := krait
+
+
+TARGET_GCC_VERSION_EXP := 4.8
+TARGET_USE_O3 := true
+
+# Flags
+TARGET_GLOBAL_CFLAGS += -O3 -mcpu=cortex-a15 -mtune=cortex-a15 -mfpu=neon-vfpv4 -mfloat-abi=softfp -funroll-loops -fomit-frame-pointer
+TARGET_GLOBAL_CPPFLAGS += -O3 -mcpu=cortex-a15 -mtune=cortex-a15 -mfpu=neon-vfpv4 -mfloat-abi=softfp -funroll-loops -fomit-frame-pointer
+
 
 # Flags
 COMMON_GLOBAL_CFLAGS += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64
@@ -127,7 +150,8 @@ BOARD_USE_SONY_MACUPDATE := true
 
 # Filesystem
 BOARD_FLASH_BLOCK_SIZE := 131072
-TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_EXT4 := treuaok
+TARGET_USERIMAGES_USE_F2FS := true
 
 # Recovery
 TARGET_RECOVERY_FSTAB := device/sony/rhine-common/rootdir/fstab.qcom
@@ -146,7 +170,7 @@ TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TW_DEFAULT_EXTERNAL_STORAGE := true
 # TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_JB_CRYPTO := true
-TW_CRYPTO_FS_TYPE := "ext4"
+TW_CRYPTO_FS_TYPE := "f2fs
 TW_CRYPTO_REAL_BLKDEV := "/dev/block/platform/msm_sdcc.1/by-name/userdata"
 TW_CRYPTO_MNT_POINT := "/data"
 TW_CRYPTO_FS_OPTIONS := "nosuid,nodev,barrier=1,noauto_da_alloc,discard"
