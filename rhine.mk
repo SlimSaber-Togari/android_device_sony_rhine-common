@@ -42,6 +42,8 @@ PRODUCT_COPY_FILES += \
 # Init
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/fstab.qcom:root/fstab.qcom \
+    $(COMMON_PATH)/rootdir/fstab.qcom:recovery/root/fstab.qcom \
+    $(COMMON_PATH)/rootdir/twrp.fstab:recovery/root/etc/twrp.fstab \
     $(COMMON_PATH)/rootdir/init.qcom.rc:root/init.qcom.rc \
     $(COMMON_PATH)/rootdir/init.recovery.qcom.rc:root/init.recovery.qcom.rc \
     $(COMMON_PATH)/rootdir/system/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
@@ -123,6 +125,82 @@ endif
 PRODUCT_COPY_FILES += \
     $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.hw=1 \
+    debug.egl.hw=1 \
+    debug.composition.type=c2d \
+    debug.enable.wl_log=1 \
+    persist.hwc.mdpcomp.enable=false \
+    debug.mdpcomp.logs=0 \
+    debug.qctwa.statusbar=1 \
+    debug.qctwa.preservebuf=1 \
+    debug.qc.hardware=true \
+    com.qc.hardware=true \
+    av.offload.enable=true
+
+# Enable optional sensor types
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qualcomm.sensors.smd=true \
+    ro.qualcomm.sensors.game_rv=true \
+    ro.qualcomm.sensors.georv=true \
+    ro.qc.sensors.smgr_mag_cal_en=true \
+    ro.qc.sensors.step_detector=true \
+    ro.qc.sensors.step_counter=true
+    
+# Smoothness Tweaks
+PRODUCT_PROPERTY_OVERRIDES += \
+    windowsmgr.max_events_per_sec=300 \
+    debug.performance.tuning=1 \
+    video.accelerate.hw=1 \
+    ro.max.fling_velocity=12000 \
+    ro.min.fling_velocity=8000 \
+    ro.config.disable.hw_accel=false \
+    persist.sys.ui.hw=1
+
+
+PRODUCT_PACKAGES += \
+    libc2dcolorconvert \
+    libstagefrighthw \
+    libOmxCore \
+    libmm-omxcore \
+    libOmxVdec \
+    libOmxVdecHevc \
+    libOmxVenc \
+    libdashplayer \
+    qcmediaplayer
+    
+# Hardware codecs
+PRODUCT_PROPERTY_OVERRIDES += \
+    qcom.hw.aac.encoder=true
+
+PRODUCT_PACKAGES += \
+    libOmxAacEnc \
+    libOmxAmrEnc \
+    libOmxEvrcEnc \
+    libOmxQcelp13Enc
+    
+# Audio effects
+PRODUCT_PACKAGES += \
+    libqcomvisualizer \
+    libqcomvoiceprocessing \
+    libqcomvoiceprocessingdescriptors
+
+PRODUCT_PACKAGES += \
+    libqomx_core \
+    libmmcamera_interface \
+    libmmjpeg_interface \
+    mm-jpeg-interface-test \
+    mm-qcamera-app
+    
+# powerhal
+PRODUCT_PACKAGES += \
+    power.msm8974
+    
+# for powerhal
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.extension_library=/vendor/lib/libqc-opt.so
+
+    
 # Qualcomm Random Number Generator
 PRODUCT_PACKAGES += \
     qrngd \
